@@ -19,6 +19,7 @@ public class Index {
 	public String test2(int a, int b) {
 		this.sum = a + b;
 		return String.valueOf(this.sum);
+		
 	}
 
 }
