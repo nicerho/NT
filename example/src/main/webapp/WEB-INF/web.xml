@@ -28,4 +28,12 @@
 		<servlet-name>insert</servlet-name>
 		<url-pattern>/insert.do</url-pattern>
 	</servlet-mapping>
+		<servlet>
+		<servlet-name>passloss</servlet-name>
+		<servlet-class>example.PassLoss</servlet-class> <!-- 패키지명 package.class -->
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>passloss</servlet-name>
+		<url-pattern>/pass_loss.do</url-pattern>
+	</servlet-mapping>
 </web-app>
