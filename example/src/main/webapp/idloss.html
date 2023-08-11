@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-compatible" content="IE=Edge, chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>아이디 찾기</title>
+	<style>
+		.box {
+			width: 150px;
+			height: 50px;
+			border: 1px solid #ccc;
+		}
+	</style>
+</head>
+<!--
+	응용문제 : 아이디 찾기 버튼 클릭 시 사용자 이름, 이메일 모두 이볅이 되어야만 하며 해당 정보를 post로 ajax를 통하여 전송
+-->
+
+<body>
+
+	[아이디 찾기]
+	이름 : <input type="text" id="username">
+	이메일 : <input type="text" id="useremail">
+	<input type="button" value="아이디 찾기" onclick="id_search()">
+	<br><br>
+	아이디명 : <div class="box" id="box"></div>
+
+</body>
+<script>
+
+	function id_search() { //form 태그가 없을 경우 getElementById로 값을 확인..
+		var name = document.getElementById("username");
+		var email = document.getElementById("useremail");
+		if (name.value == "") {
+			alert("이름입력")
+		} else if (email.value == "") {
+			alert("이메일입력")
+		} else {
+			ajax(name.value, email.value);
+		}
+	}
+	function ajax(a, b) {
+		var info;	//ajax 통신 변수
+		var data;	//응답 받는 결과 변수
+		var postdata = "username" + a + "&useremail" + b; //back에게 전달되는 2개의 값, 사용자명과 사용자의 이메일을 전달
+		function fun1() {
+			if (window.XMLHttpRequest) {
+				return new XMLHttpRequest();
+			}
+		}
+		function fun2() {
+			if (info.readyState == XMLHttpRequest.DONE && info.status == 200) {
+				console.log(this.response)
+			}
+		}
+		info = fun1();
+		info.onreadystatechange = fun2;
+		info.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+		info.open("POST", "./idsearch.do", true);
+		info.send(postdata);
+	}
+</script>
+
+</html>
