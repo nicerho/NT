@@ -44,7 +44,7 @@
 	function ajax(a, b) {
 		var info;	//ajax 통신 변수
 		var data;	//응답 받는 결과 변수
-		var postdata = "username" + a + "&useremail" + b; //back에게 전달되는 2개의 값, 사용자명과 사용자의 이메일을 전달
+		var postdata = "username=" + a + "&useremail=" + b; //back에게 전달되는 2개의 값, 사용자명과 사용자의 이메일을 전달
 		function fun1() {
 			if (window.XMLHttpRequest) {
 				return new XMLHttpRequest();
@@ -52,13 +52,22 @@
 		}
 		function fun2() {
 			if (info.readyState == XMLHttpRequest.DONE && info.status == 200) {
-				console.log(this.response)
+				//console.log(this.response)
+				var result = this.response;
+				if (result == "error") {
+					alert("해당 정보를 확인하지 못하였습니다.")
+				} else {
+					var html = document.getElementById("box");
+					html.append(result); //append  : 해당 아이디값 안에 값을 적용, append에는 html코드를 추가할 수 없다.
+					//html.insertBefore(result,null); insertBefore는 추후설명...
+					//html 태그와 함께 데이터를 적용하고 싶으면 innerHTML 을 쓰자 ex)html.innerHTML =  "<p>"+result+"</p>"
+				}
 			}
 		}
 		info = fun1();
 		info.onreadystatechange = fun2;
-		info.setRequestHeader("content-type", "application/x-www-form-urlencoded");
 		info.open("POST", "./idsearch.do", true);
+		info.setRequestHeader("content-type", "application/x-www-form-urlencoded");
 		info.send(postdata);
 	}
 </script>
