@@ -1,6 +1,7 @@
 package example;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +19,8 @@ public class PassLoss extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter pw = response.getWriter();
 		int count = 0;
 		String name = request.getParameter("username").intern();
 		String mail = request.getParameter("useremail").intern();
@@ -33,8 +36,11 @@ public class PassLoss extends HttpServlet {
 		}
 		if (count == 1) {
 			System.out.println("임시 비번은 a123456");
+			pw.write("<script>alert('임시 비밀번호는 a123456입니다')</script>");
 		} else {
 			System.out.println("해당 정보 확인 불가");
+			pw.write("<script>alert('해당 정보 확인 불가');history.go(-1)</script>");
+			
 		}
 
 	}

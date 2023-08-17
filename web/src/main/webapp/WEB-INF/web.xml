@@ -24,11 +24,19 @@
 		<url-pattern>/calok.do</url-pattern>
 	</servlet-mapping>
 	<servlet>
-	<servlet-name>lotto</servlet-name>
-	<servlet-class>web.Lotto</servlet-class>
+		<servlet-name>lotto</servlet-name>
+		<servlet-class>web.Lotto</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>lotto</servlet-name>
 		<url-pattern>/lotto_ok.do</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>fileupload1</servlet-name>
+		<servlet-class>web.File</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>fileupload1</servlet-name>
+		<url-pattern>/fileupok.do</url-pattern>
 	</servlet-mapping>
 </web-app>
