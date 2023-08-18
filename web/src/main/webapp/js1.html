@@ -1,10 +1,59 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>자스 기초 + 즉시실행</title>
 </head>
+자스의 여러 종류의 함수들<br>
+일반 : 호출형태로 실행되는 함수<br>
+이벤트 핸들링 : onclick,onchange,onsubmit<br>
+이벤트 버블링 : 하위에서 상위 오브젝트에 전달하는 형태 ex) ll -> ui<br>
+버블링 : 동의안함을 하나라도 체크 할 경우 상위의 동의된 항목들의 동의가 풀리는 경우..<br>
+이벤트 캡쳐링 : 상위에서 하위로 .. 이벤트 버블링의 반대로 생각하자<br>
+캡쳐링 : 전체동의 클릭 시 모두 체크되는 상황들<br>
+리턴 : return<br>
+
 <body>
+	num 1 : <input type="text" id="no1"><br>
+	num 2 : <input type="text" id="no2"><br>
+	<button type="button" onclick="abc()">크릭</button>
 
 </body>
+<script>
+	function abc(){ //이벤트핸들링 함수
+		//응문 1 : 숫자1과 숫자2의 값을 입력 예를들어 1,10을 넣을경우 1~10 모든숫자가 더해진 갑승ㄹ 추렭
+		var num1 = document.getElementById("no1").value;
+		var num2 = document.getElementById("no2").value;
+		var sum = 0;
+		var a;
+		for(a=num1;a<=num2;a++){
+			sum += Number(a);
+		}
+		console.log(sum)
+	}
+	var a = "전변";
+	function aaa() { //일반함수
+		var b = "지변";
+		console.log(a)
+		a = "전변2"
+		console.log(a)
+		bbb();
+	}
+	function bbb() { //일반함수
+		var b = "지변";
+		console.log(a)
+		var sum = ccc();//호출 후 리턴값 받음
+		console.log(sum[0])
+		console.log(sum[1])
+	}
+	function ccc() { //리턴함수
+		var b = "리턴값";
+		var c = "리턴값2";
+		return [b, c];
+
+	}
+	aaa();
+</script>
+
 </html>

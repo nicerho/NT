@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>URI 활용 데이터 받기</title>
+</head>
+
+<body>
+검색어 : <div id="search"></div><br>
+카테고리 : <div id="cate"></div><br>
+</body>
+<script>
+	//데이터값이 1개일 때
+	/* 
+	var uri = window.location.search //파라미터(URI)를 가져오는 역할
+	var data = uri.split("?search=")//split() : 단어를 기준으로 배열화 시키는 함수
+	var v = decodeURI(data[1])//decodeURI() : 한글 또는 특문 깨지는거복원
+	console.log(v)
+	*/
+	//데이터가 2개 이상일 떄
+	var uri = decodeURI(window.location.search)
+	var data = uri.split("&cate=")
+	var data2 = data[0].split("?search=")
+	console.log(data)
+	console.log(data2)
+	document.getElementById("search").innerText=data2[1]
+	document.getElementById("cate").innerText=data[1]
+</script>
+
+</html>

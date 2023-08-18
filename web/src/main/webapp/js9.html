@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<form id="f">
+		고객명 : <div id="name"></div><br>
+		아이디 : <div id="id"></div><br>
+		<input type="checkbox" name="info"> 개인정보 3자에제공(선택)
+	</form>
+</body>
+<script>
+	var uri = decodeURI(window.location.search)
+	var data = uri.split("&info=")
+	var data2 = data[0].split("&id=")
+	var data3 = data2[0].split("?name=")
+	console.log(data)
+	console.log(data2)
+	console.log(data3)
+	
+		
+
+</script>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>자스 이벤트 핸들링 기초</title>
+</head>
+
+<body>
+	email : <input type="text" id="email">
+	<!--
+		onchange : 사용자가 선택 또는 값이 변화 되었을 떄 적용되는 이벤트
+	-->
+	<select id="email2" onchange="abc(this.value)">
+		<option value="@naver.com">네이버</option>
+		<option value="@nate.com">네이트</option>
+		<option value="@google.com">구글</option>
+		<option value="">직접입력</option>
+	</select>
+</body>
+<br>
+<input type="hidden" id="money" value="10000">
+수량 : <select id="ea" onchange="bbb(this.value)">
+	<option value="1">1 EA</option>
+	<option value="2">2 EA</option>
+	<option value="3">3 EA</option>
+</select>
+<br>
+최종가격 : <div id="total">10000</div>
+<script>
+	function abc(e){ //이벤트 핸들링
+		var aa = document.getElementById("email")
+		aa.value=e;
+	}
+	function bbb(z){
+		var aa = document.getElementById("money").value //1개당 실제 가격
+		var bb = document.getElementById("total")
+		var sum = Number(aa)*Number(z) //실가격 * 수량
+		bb.innerText = sum //해당 태그안에 문자료 출력.. innerHTML, innerText 는 기존의 내용을 삭제하고 출력
+	}
+</script>
+</html>

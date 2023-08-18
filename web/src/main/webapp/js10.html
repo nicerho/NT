@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>random</title>
+</head>
+<!--
+	실<유리,무리<정
+	실
+	유리
+	무리
+	정
+	Math.ceil
+	Math.round
+	Math.floor
+-->
+
+<body>
+	암호(4자리) : <input type="text" id="num">
+</body>
+<script>
+	//var no = Math.ceil(Math.random() * 10) // ceil():1~10 소수점 무조건 올림 0.1 = 1
+	//var no = Math.floor(Math.random() * 10)	// floor():0~9 소수점 무조건 쳐냄 0.1 = 0
+	//var no = Math.round(Math.random() * 10) round() : 0~9 소수점 0.5 이상이믄 무저건 반올림 
+	var f;
+	var sc = ""
+	for (f = 1; f <= 4; f++) {
+		sc += Math.floor(Math.random() * 10)
+	}
+	document.getElementById("num").value = sc;
+
+</script>
+
+</html>

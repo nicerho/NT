@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>자스 버블링 + 캡쳐링 기초</title>
+</head>
+
+<body>
+	전체선택 : <input type="checkbox" id="all" onclick="abc(this.checked)"><br>
+	데이터1 : <input type="checkbox" id="c1" onclick="bbb()"><br>
+	데이터2 : <input type="checkbox" id="c2" onclick="bbb()"><br>
+	데이터3 : <input type="checkbox" id="c3" onclick="bbb()"><br>
+	데이터4 : <input type="checkbox" id="c4" onclick="bbb()"><br>
+	데이터5: <input type="checkbox" id="c5" onclick="bbb()"><br>
+</body>
+<script>
+	function abc(e) {
+		var w = 1;
+		while (w <= 5) {
+			document.getElementById("c" + w).checked = e;
+			w++
+		}
+	}
+	function bbb() {
+		var aa = document.getElementById("all") //전체 선택 오브젝트
+		var w = 1;
+		var check = true; // 체크유무 핸들링
+		do { //해당 아이디별로 체크가 해제되었을 경우
+			if (document.getElementById("c" + w).checked == false) {
+				check = false;
+			}
+			w++
+		} while (w <= 5)
+		if (check == false) { // 하나라도 체크가 안되었을 경우 전체 체크 해제
+			aa.checked = false;
+		} else { //모두 체크 되었을 경우 전체선택 활성화
+			aa.checked = true
+		}
+		total.innerText
+	}
+</script>
+</html>

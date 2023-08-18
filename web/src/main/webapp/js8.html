@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<form id="f" method="get" onsubmit="return go()" action="./js9.html">
+		고객명 <input type="text" name="name"><br>
+		아이디 <input type="text" name="id"><br>
+		<input type="checkbox"  name="info" value="0"> 개인정보 3자 제공(선택)<br>
+		<button>이벤트참여</button>
+	</form>
+</body>
+<script>
+	function go() {
+		if (f.name.value == "") {
+			alert("이름입력")
+			return false;
+		} else if (f.id.value == "") {
+			alert("아이디입력")
+			return false;
+		} else if (f.info.checked == true) {
+			f.info.value = "1"
+			return
+		} else{
+			
+			return }
+	}
+	//http://192.168.110.230:8080/web/js9.html
+</script>
+
+</html>
