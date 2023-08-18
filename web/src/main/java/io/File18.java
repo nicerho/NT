@@ -1,9 +1,12 @@
 package io;
 
-import java.io.File;
-import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,7 +24,6 @@ public class File18 {
 		try {
 			new hw().abc();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -29,29 +31,27 @@ public class File18 {
 
 class hw {
 	public void abc() throws IOException {
-		Scanner sc = new Scanner(System.in);
 		Path data1 = Paths.get("E:\\project\\web\\src\\main\\webapp\\data_num.txt");
-		//Files.createFile(data1);
+		Files.createFile(data1);
 		FileWriter fw = new FileWriter("E:\\project\\web\\src\\main\\webapp\\data_num.txt", true);
-		int number = sc.nextInt();
+		Scanner sc = new Scanner(System.in);
+		int number = 0;
 		int x = 0;
-		int y = 1;
 		while (x < 10) {
-			System.out.println(y+"번재 숫자 입력");
-			if (number > 100) {
-				System.out.println("100초과");
-				continue;
-			} else if (number < -1) {
-				System.out.println("0이상만");
-				continue;
+			if (number > 100 || number < 0) {
+				System.out.println("0~100 사이 숫자만 입력");
+				number = sc.nextInt();
 			} else {
 				fw.write(number);
+				number = sc.nextInt();
+				x++;
 			}
-			x++;
-			y++;
+			if (x == 10) {
+				System.out.println("끝");
+				break;
+			}
 		}
-		fw.close();
 		sc.close();
-
+		fw.close();
 	}
 }
