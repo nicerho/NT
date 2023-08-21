@@ -17,19 +17,33 @@
 -->
 
 <body>
-	암호(4자리) : <input type="text" id="num">
+	암호(4자리) : <input type="text" id="num"><br>
+	<div class="box" id="box">
+		<img src="./number/no0.png">
+	</div>
 </body>
+<style>
+	.box{
+		width:200px;
+		height:80px;
+		background-image:url("./number/security_back.png") ;
+		overflow: hidden;
+	}
+</style>
 <script>
 	//var no = Math.ceil(Math.random() * 10) // ceil():1~10 소수점 무조건 올림 0.1 = 1
 	//var no = Math.floor(Math.random() * 10)	// floor():0~9 소수점 무조건 쳐냄 0.1 = 0
 	//var no = Math.round(Math.random() * 10) round() : 0~9 소수점 0.5 이상이믄 무저건 반올림 
 	var f;
 	var sc = ""
+	var sc2 = ""
 	for (f = 1; f <= 4; f++) {
-		sc += Math.floor(Math.random() * 10)
+		sc = Math.floor(Math.random() * 10)
+		sc2 += sc
+		document.getElementById("box").innerHTML += "<img src='./number/no'"+sc+".png>"
 	}
-	document.getElementById("num").value = sc;
-
+	document.getElementById("num").value = sc2;
+	
 </script>
 
 </html>

@@ -38,7 +38,6 @@ class data5 {
 		while ((line = bf.readLine()) != null) {
 			// System.out.println(line);
 			list.add(line);
-
 		}
 		bf.close();
 		this.fr.close();

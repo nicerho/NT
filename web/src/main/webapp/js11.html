@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>onclick - onchange</title>
+</head>
+<script>
+	function abc(n){
+		console.log(n)
+	}
+</script>
+<body>
+	<select onchange="abc(this.value)">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+	</select>
+	<form method="get" action="http://www.naver.com" id="f">
+		<input type="submit">
+		
+	</form>
+	<input type="button" onclick="bbb()">
+</body>
+<script>
+	function bbb(){
+		f.submit();
+	}
+</script>
+</html>
