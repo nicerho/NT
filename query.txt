@@ -1,0 +1,162 @@
+sql
+insert - 저장
+update - 수정
+delete - 삭제
+select - 검색,출력
+
+Linux & Unix => my.cnf, my.ini(환경설정)
+innodb_buffer : 메모리크기
+innodb_buffer_size : 로그정보
+innodb_thread_concurrency : 스레드 갯수 설정
+
+사용자 추가
+localhost - 서버에 접속 후 로그인 하는 형태
+% - 외부에서 접속을 허용하여 로그인 하는 형태
+ip주소 - 특정 ip만 허용하여 접속하는 형태
+
+mysql 5.5이하
+insert into 사용자 추가
+mysql 5.5이상
+create 명령어로 사용자 추가
+
+mysql : 사용자 추가, 사용자 권한 추가 , 외부접속 설정, DB백업 및 복구 등 여러 설정관련된 작업을 수행가능
+show databases : 데이터베이스 리스트 출력
+use database : 데이터베이스 사용
+show tables : 해당 DB에 있는 테이블 정보 출력
+
+create '테이블명' '가상아이디'@'localhost' identified by '비밀번호' ; <- 유저 생성 명령어
+DB를 가상사용자에게 권한 부여
+insert into db values('localhost','db명','사용자','권한여부~');
+db 재부팅(마리아db)
+mariadb-admin -u root -p reload
+특정 테이블을 복사하여 새 테이블 만들기
+create table 테이블명 (select * from 원본테이블); (각 칼럼에 대한 설정값은 따라가지 않음)
+ create table member2 like member;(얘는 내용은 안따라가고 구조만 따라감)
+이후 내용을 복사하고 싶으면 insert into 테이블명 (selelct * from 원본테이블);
+
+DELETE
+delete from 테이블명 where 컬럼명='특정값';
+
+DESC
+desc '테이블명' : 테이블 내 컬럼명 출력
+
+UPDATE
+update 테이블명 set 컬럼명='바꾸고자 하는 데이터 값';
+ex) update member set mpass='aaa';
+update 테이블명 set 컬럼명='바꾸고자 하는 데이터 값' where 컬럼명=특정값 (특정 행의 데이터를 업데이트);
+ex) update member set mpass='aaa123' where mno='10';
+
+
+SELECT 
+select * from '테이블명' : 전체 리스트
+select * from '테이블명' where '컬럼명'='컬럼값' = 해당 데이터 중 조건에 부합하는 데이터를 출력
+select 컬렴명 from 테이블명 : db에서 해당 컬럼에 대한 데이터를 출력한다
+select count(*) from 테이블명 : db에서 데이터의 갯수를 파악한다
+select count(*) as cnt from 테이블명 : 컬럼명이 cnt로 변경되며 데이터 갯수팡가
+select * from 테이블명 order by 컬럼명 asc(오름차순) 또는 desc(내림차순)
+and 또는 or은 특정 데이터를 찾기 위해 조건을 건다 and는 && or은 ||
+ select * from event where esoft='0' and ecode='abcdefg';
+ select * from event where esoft='0' or ecode='abcdefg';
+select * from 테이블명 where 컬럼명 like '%단어' : 해당 검색 단어로 끝나는 데이터 찾기
+select * from 테이블명 where 컬럼명 like '단어%' : 해당 검색 단어로 시작하는 데이터 찾기
+select * from 테이블명 where 컬럼명 like '%단어%' : 해당 검색 단어가 포함된 데이터 찾기
+
+INSERT
+insert into '테이블명'(컬럼명) values ('데이터값');
+insert into '테이블명' values('데이터값'); 
+,'y'
+
+DB외부접속방법
+mysql -h 'ip주소 또는 도메인명' -u '유저명' -p (만약 DB포트가 기본포트가 아닐경우) --port '포트번호'
+create table event(
+필드명 자료형(범위) null or not null extra
+
+숫자자료형
+tinyint(1~127) 
+smallint(1~32767)
+mediumint(1~8388000쯤)
+int(1~2140000000)
+bigint(1~9200000000000000000쯤)
+float 소수점 찍기 위해
+double : float * 2 
+문자 자료형
+char (1~224)
+varchar(1~254)
+text 텍스트 파일 용량으로 대략 64kb
+mediumtext 텍스트 파일 용량으로 대략 16mb
+longtext 텍스트 파일 용량으로 대략 4gb
+
+enum자료형
+html의 select + option 정도로 생각해두자
+ex) enum('M','W')
+set : enum과 동일하게 사용가능한 형태(문자열형태)
+
+시간관련자료형
+date + default : 2023-08-21 2023.08.21 20230821 등으로 조작가능
+time + default : 14:22:22 14-22-22 142222 등으로 조작가능
+datetime + defualt : 2023-08-21 14:22:22
+timestamp : 자동으로 서버에 있는 시간을 입력시킬때 
+(timestamp 입력시 default 또는 now()를 입력해 서버시간이 자동적용되게 할 수 잇다)
+
+자료입력방법
+insert into '테이블명' (컬럼명~) values (컬럼값)
+또는
+insert into '테이블명' values (컬럼값)
+
+alter : DB구조 또는 테이블 구조, 컬럼명의 변경 또는 수정이 필요할 때 사용한다
+DB에 컬럼을 추가하고싶다면
+alter table '테이블명' add '추가하고싶은 컬럼명' 자료형 null 여부 after 기준되는 컬럼
+alter table event add ename char(50) not null after eid;
+alter table 테이블명 modify 수정할 컬럼명 자료형 : 수정할 컬럼을 세팅
+ex) alter table event modify ename char(50) null;
+alter table event drop 컬럼명; : 특정컬럼삭제
+
+foreign key
+외래키 값은 null 또는 부모 테이블의 기본키 값과 동일해야한다
+부모 테이블의 기본키, 고유키를 외래키로 저장 가능
+부모테이블의 여러개가 pri가 잇을 경우 외래키도여러개 활용 가능
+부모 테이블에 auto_increment 사용 된 필드는 외래키 설정 시 필수로 설정해야한다
+
+
+create table member(
+mno int not null auto_increment,
+mid char(50) not null,
+mpass char(50) not null,
+memail varchar(100) not null,
+mtel char(11) not null,
+marea char(2) not null,
+minter enum('A','B','C','D','E','F') default 'A' not null,
+mage int(2) not null,
+mdate datetime not null default '0001-01-01 00:00:00',
+primary key(mno),
+unique key(mid,memail)
+);
+
+create table census(
+no int not null auto_increment,
+mname char(50) not null,
+mid char(50) not null,
+memail varchar(100) not null,
+marea char(2) not null,
+mtel char(11) not null,
+mage int(3) not null,
+msex enum('M','W') default 'M' not null,
+mjcode char(3) not null,
+primary key(no),
+unique key(mid,memail,mtel)
+);
+
+create table admin(
+ano int(5) not null auto_increment,
+부서 int(2) not null,
+지역 int(2) not null,
+aid char(50) not null,
+aname char(50) not null,
+apw char(50) not null,
+aemail varchar(50) not null,
+atel char(11) not null,
+ajob int(2) not null,
+adate datetime not null default '0001-01-01 00:00:00',
+primary key(ano),
+unique key(aid,aemail)
+);
