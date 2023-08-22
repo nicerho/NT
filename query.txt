@@ -112,10 +112,15 @@ ex) alter table event modify ename char(50) null;
 alter table event drop 컬럼명; : 특정컬럼삭제
 
 foreign key
+테이블과 테이블을 연결하는 키, 부모 테이블과 연결 사항, 부모-> 자식 테이블로 연결시 절대 부모테이블의 데이터를 삭제,수정하지 못한다
 외래키 값은 null 또는 부모 테이블의 기본키 값과 동일해야한다
 부모 테이블의 기본키, 고유키를 외래키로 저장 가능
 부모테이블의 여러개가 pri가 잇을 경우 외래키도여러개 활용 가능
 부모 테이블에 auto_increment 사용 된 필드는 외래키 설정 시 필수로 설정해야한다
+primary key 
+중복되지 않으며, 자동증가값은 무저건 primary key 걸어야함
+unique key
+중복되지 않는값
 
 
 create table member(
