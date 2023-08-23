@@ -60,6 +60,14 @@ and 또는 or은 특정 데이터를 찾기 위해 조건을 건다 and는 && or
 select * from 테이블명 where 컬럼명 like '%단어' : 해당 검색 단어로 끝나는 데이터 찾기
 select * from 테이블명 where 컬럼명 like '단어%' : 해당 검색 단어로 시작하는 데이터 찾기
 select * from 테이블명 where 컬럼명 like '%단어%' : 해당 검색 단어가 포함된 데이터 찾기
+select sum(숫자필드) from 테이블명; 총합 구하기
+select sum(숫자필드) from 테이블명 where 필드명='필드값'; 총합 구하기
+select avg(숫자필드) from 테이블명; 평균 구하기
+select avg(숫자필드) from 테이블명 where 필드명='필드값'; 평균 구하기
+select count(*) from 테이블명 group by 필드명; 같은 데이터끼리 묶어서 카운팅 후 출력
+limit? 전체데이터를 원하는 갯수만큼 분할하여 출력할 때 사용(시작점,갯수)
+select * from shop_member limit 0,5; 0번부터 5개
+select * from shop_member limit 7,10; 7번부터 10개
 
 INSERT
 insert into '테이블명'(컬럼명) values ('데이터값');
@@ -123,45 +131,25 @@ unique key
 중복되지 않는값
 
 
-create table member(
-mno int not null auto_increment,
-mid char(50) not null,
-mpass char(50) not null,
-memail varchar(100) not null,
-mtel char(11) not null,
-marea char(2) not null,
-minter enum('A','B','C','D','E','F') default 'A' not null,
-mage int(2) not null,
-mdate datetime not null default '0001-01-01 00:00:00',
-primary key(mno),
-unique key(mid,memail)
-);
 
-create table census(
-no int not null auto_increment,
-mname char(50) not null,
-mid char(50) not null,
-memail varchar(100) not null,
-marea char(2) not null,
-mtel char(11) not null,
-mage int(3) not null,
-msex enum('M','W') default 'M' not null,
-mjcode char(3) not null,
-primary key(no),
-unique key(mid,memail,mtel)
-);
+join? foreign key를 이용하여 사용가능 또는 부모+부모테이블로 가능 
 
-create table admin(
-ano int(5) not null auto_increment,
-부서 int(2) not null,
-지역 int(2) not null,
-aid char(50) not null,
-aname char(50) not null,
-apw char(50) not null,
-aemail varchar(50) not null,
-atel char(11) not null,
-ajob int(2) not null,
-adate datetime not null default '0001-01-01 00:00:00',
-primary key(ano),
-unique key(aid,aemail)
-);
+foreign key 사용예시 1) select * from 부모테이블 as ??? join 자식테이블 as !!! where ???.필드명 = !!!.필드명;
+foreign key 사용안하는예시 1 ) select * from 부모테이블 as ??? join 다른 부모 테이블 as ??? where !!!.필드명 = ???.필드명;
+foreign key 사용예시 2 ) select * from 자식테이블 as ??? join 다른 부모 테이블 as ??? where !!!.필드명 = ???.필드명;
+
+view? 가상테이블 
+create view 테이블명 as select 필드명~ from 테이블명 (where)~
+view는 데이터의 삭제 수정 입력 모두 불가능
+view는 원본데이터오 ㅏ실시간으로 연동된다
+
+숙제? 
+1. 사용자 리스트 중 휴대폰 번호가 5690 으로 끝나는 고객정보 출력 아이디 고객명 연락처 이메일 레벨 MariaDB [shop]> select a.id,a.name,a.tel,a.email,b.levelname from shop_member as a join shop_level as b where a.tel like '%5690' and a.level=b.level;
+2. shop_member2를 생성하여 해당 절ㅇ보에 맞는 사용자만 데이터 이관, 지역코드가 A외 지방 지역코드 사용자만 적용 > create table shop_member2 like shop_member; insert into shop_member2 (select * from shop_member where area!='A');
+3. 해당 데이터 베이스를 모두 백업하여 shop.sql로 가져옵니다mysqldump -u root -p shop>e:\shopbackup.sql
+230823 
+mekeyace.kbsn.or.kr/data1
+응문1.
+shop_member data 중 각 지역별로 가입자 수 찍기
+예시 서울 xx
+create view member_area as select a.id,a.name,b.areaname from shop_member as a join area as b where a.area=b.area; 
