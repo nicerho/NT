@@ -24,6 +24,14 @@ show databases : 데이터베이스 리스트 출력
 use database : 데이터베이스 사용
 show tables : 해당 DB에 있는 테이블 정보 출력
 
+DB 백업
+mysqldump -u 사용자명 -p db명>경로 + 파일명
+ex) mysqldump - u park -p shop>e:\backup.sql
+특정 테이블만 백업
+mysqldump -u 사용자명 -p db명 테이블명 > 경로 + 파일명;
+ex)mysqldump -u park -p shop shop_member > e:\shop_memberbackup.sql
+
+
 create '테이블명' '가상아이디'@'localhost' identified by '비밀번호' ; <- 유저 생성 명령어
 DB를 가상사용자에게 권한 부여
 insert into db values('localhost','db명','사용자','권한여부~');
@@ -68,6 +76,18 @@ select count(*) from 테이블명 group by 필드명; 같은 데이터끼리 묶
 limit? 전체데이터를 원하는 갯수만큼 분할하여 출력할 때 사용(시작점,갯수)
 select * from shop_member limit 0,5; 0번부터 5개
 select * from shop_member limit 7,10; 7번부터 10개
+select max(컬럼명) from 테이블명 최대값 구하기
+select min(컬럼명) from 테이블명 최소값 구하기
+
+select in select 
+ex ) member 테이블에서 가장 나이가 많은 이용자의 정보만 뽑고 싶다면?
+select * from member where age=(select max(age) from member);
+select 안에서 as를 이용해보기
+ex ) select name,(buyquantity*totalprice) as total from buy_list order by total desc;
+ex2 )  select a.id,a.name,b.tel,a.buyquantity,a.totalprice,(a.buyquantity*a.totalprice) as total from buy_list as a join member as b where a.id=b.id and a.buyquantity*a.totalprice=(select max(buyquantity*totalprice) from buy_list);
+
+sel + sel + join
+select a.필드명,a.필드명 from 테이블명 as a join (select max(필드명) as ??? from 같은테이블명) as b where a.필드명 = b.필드명
 
 INSERT
 insert into '테이블명'(컬럼명) values ('데이터값');
@@ -111,6 +131,13 @@ insert into '테이블명' (컬럼명~) values (컬럼값)
 또는
 insert into '테이블명' values (컬럼값)
 
+mysql에서 데이터를 json형식으로 뽑아보기
+DB ver 5.5 이하 
+select json_arrayagg(json_object('키이름',컬럼명)) from 테이블명;
+DB ver 5.5 이상
+select json_object('키이름',컬럼명) as 대표키이름 from 테이블명 where 조건;
+ex) select json_object('name',name,'age',age) as memberlist from shop_member where area='A' limit 0,5;
+
 alter : DB구조 또는 테이블 구조, 컬럼명의 변경 또는 수정이 필요할 때 사용한다
 DB에 컬럼을 추가하고싶다면
 alter table '테이블명' add '추가하고싶은 컬럼명' 자료형 null 여부 after 기준되는 컬럼
@@ -118,6 +145,8 @@ alter table event add ename char(50) not null after eid;
 alter table 테이블명 modify 수정할 컬럼명 자료형 : 수정할 컬럼을 세팅
 ex) alter table event modify ename char(50) null;
 alter table event drop 컬럼명; : 특정컬럼삭제
+alter table 테이블명 change 전 컬럼명 바꾸고싶은 컬럼명 자료형 null 여부 이후설정 ; <- 테이블에서 컬럼의 이름을 바꾸고싶을때
+alter table 테이블명 drop column 컬럼명 : 해당 컬럼만 삭제
 
 foreign key
 테이블과 테이블을 연결하는 키, 부모 테이블과 연결 사항, 부모-> 자식 테이블로 연결시 절대 부모테이블의 데이터를 삭제,수정하지 못한다
@@ -130,6 +159,14 @@ primary key
 unique key
 중복되지 않는값
 
+보안암호화 사용법
+base64 - v5.1(X) v5.6 이상(O) 암호화 : select to_base64('값') , 복호화 : select from_base64('암호화된 64코드')
+md5 - 암호화 : select md5('값')
+sha1 - 암호화 : select sha1('값') 기본값은 32
+sha2 - DB 환경설정 후 사용 64 128 256 512
+암호화 : select sha2('값',암호화비트(ex:256))
+mysql 자체 암호화 기술
+암호화 : select password('값')
 
 
 join? foreign key를 이용하여 사용가능 또는 부모+부모테이블로 가능 
@@ -142,6 +179,8 @@ view? 가상테이블
 create view 테이블명 as select 필드명~ from 테이블명 (where)~
 view는 데이터의 삭제 수정 입력 모두 불가능
 view는 원본데이터오 ㅏ실시간으로 연동된다
+with? 임시테이블, 메모리를 활용하여 빠르게 데이터를 확인할 때 사용
+with 임시테이블명 as (select 컬럼명 from 테이블명) select 컬럼명 from 임시테이블명;
 
 숙제? 
 1. 사용자 리스트 중 휴대폰 번호가 5690 으로 끝나는 고객정보 출력 아이디 고객명 연락처 이메일 레벨 MariaDB [shop]> select a.id,a.name,a.tel,a.email,b.levelname from shop_member as a join shop_level as b where a.tel like '%5690' and a.level=b.level;
