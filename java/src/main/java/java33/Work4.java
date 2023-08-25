@@ -1,0 +1,93 @@
+package java33;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.util.Scanner;
+
+public class Work4 {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		Connection ct = null;
+		try {
+			System.out.println("회원가입 형태");
+			System.out.println("1.일반 고객 2.사업자 고객");
+			String type = sc.nextLine().intern();
+			if (Integer.parseInt(type) == 1) {
+				System.out.println("아이디?");
+				String id = sc.nextLine().intern();
+				System.out.println("비밀번호?");
+				String password = sc.nextLine().intern();
+				System.out.println("이름?");
+				String name = sc.nextLine().intern();
+				System.out.println("전화번호?");
+				String tel = sc.nextLine().intern();
+				System.out.println("이메일?");
+				String email = sc.nextLine().intern();
+				if (id != "" && password != "" && name != "" && tel != "" && email != "" && tel.length() < 12) {
+					String insert = "insert into test3 values ('0','"+id+"','"+password+"','"+name+"','"+tel+"','"+email+"');";
+					ct = dbconfig4.info();
+					PreparedStatement ps = ct.prepareStatement(insert);
+					int oksign = ps.executeUpdate();
+					if (oksign == 1) {
+						System.out.println("ok");
+						ps.close();
+						ct.close();
+						sc.close();
+					} else {
+						System.out.println("sql syntax error");
+						Work4.main(null);
+					}
+				}
+			} else if (Integer.parseInt(type) == 2) {
+				System.out.println("아이디?");
+				String id = sc.nextLine().intern();
+				System.out.println("비밀번호?");
+				String password = sc.nextLine().intern();
+				System.out.println("이름?");
+				String name = sc.nextLine().intern();
+				System.out.println("전화번호?");
+				String tel = sc.nextLine().intern();
+				System.out.println("이메일?");
+				String email = sc.nextLine().intern();
+				System.out.println("사업자번호?");
+				String num = sc.nextLine().intern();
+				if (id != "" && password != "" && name != "" && tel != "" && email != "" && tel.length() < 12
+						&& num != "" && Integer.parseInt(num) < 11) {
+					String insert = "insert into test4 values ('0','" + id + "','" + password + "','" + name + "','"
+							+ tel + "','" + "','" + email + "','" + num + "');";
+					ct = dbconfig4.info();
+					PreparedStatement ps = ct.prepareStatement(insert);
+					int oksign = ps.executeUpdate();
+					if (oksign == 1) {
+						System.out.println("ok");
+						ps.close();
+						ct.close();
+						sc.close();
+					} else {
+						System.out.println("sql syntax error");
+						Work4.main(null);
+					}
+				}
+			} else {
+				System.out.println("error");
+				Work4.main(null);
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+	}
+}
+
+class dbconfig4 {
+	public static Connection info() throws Exception {
+		String db_drive = "com.mysql.jdbc.Driver";
+		String db_url = "jdbc:mysql://localhost:3306/web";
+		String db_user = "hong";
+		String db_pass = "1234";
+		Class.forName(db_drive);
+		Connection con = DriverManager.getConnection(db_url, db_user, db_pass);
+		return con;
+	}
+}
