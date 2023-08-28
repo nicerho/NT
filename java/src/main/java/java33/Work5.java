@@ -26,7 +26,7 @@ public class Work5 {
 				System.out.println("이메일?");
 				String email = sc.nextLine().intern();
 				if (id != "" && password != "" && name != "" && tel != "" && email != "" && tel.length() < 12) {
-					insert = "insert into test3 values ('0','" + id + "','" + password + "','" + name + "','" + tel
+					insert = "insert into test3 values ('0','" + id + "',password('" + password + "'),'" + name + "','" + tel
 							+ "','" + email + "');";
 				}
 			} else if (type=="2") {
@@ -44,7 +44,7 @@ public class Work5 {
 				String num = sc.nextLine().intern();
 				if (id != "" && password != "" && name != "" && tel != "" && email != "" && tel.length() < 12
 						&& num != "" &&num.length()<11) {
-					insert = "insert into test4 values('0','" + id + "','" + password + "','" + name + "','" + tel
+					insert = "insert into test4 values('0','" + id + "',password('" + password + "'),'" + name + "','" + tel
 							+ "','" + email + "','"+num+"');";
 				}
 			} else {
@@ -57,6 +57,7 @@ public class Work5 {
 			int oksign = ps.executeUpdate();
 			if (oksign == 1) {
 				System.out.println("ok");
+				System.out.println(insert);
 				ps.close();
 				ct.close();
 				sc.close();
@@ -64,7 +65,11 @@ public class Work5 {
 				System.out.println("sql syntax error");
 				Work5.main(null);
 			}
-		} catch (Exception e) {
+		} 
+		catch (com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException z) {
+			System.out.println(insert);
+		}
+		catch (Exception e) {
 			System.out.println(insert);
 			e.printStackTrace();
 		}
