@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Storage 활용법</title>
+</head>
+<body>
+<script>
+	var data = "hkd"
+	window.localStorage.setItem("username",data);
+	var dataload = window.localStorage.getItem("username")
+	console.log(dataload)
+	var data2 = "실버회원"
+	window.sessionStorage.setItem("usergrade",data2)
+	var dataload2 = window.sessionStorage.getItem("usergrade")
+	console.log(dataload2)
+</script>
+</body>
+</html>

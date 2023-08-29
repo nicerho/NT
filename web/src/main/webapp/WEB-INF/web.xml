@@ -55,4 +55,12 @@
 		<servlet-name>login</servlet-name>
 		<url-pattern>/shop/loginok.do</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>write</servlet-name>
+		<servlet-class>web.Write</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>write</servlet-name>
+		<url-pattern>/board/writeok.do</url-pattern>
+	</servlet-mapping>
 </web-app>
