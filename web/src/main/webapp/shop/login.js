@@ -1,5 +1,5 @@
 function login() {
-	return true
+	return true;
 }
 
 //storage : local,session 웹 브라우저에 작은 메모리를 활용하여 해당 정보를 기억시켜놓는 공간 단점은 브라우저 종류가 다를 경우 스토리지값이 유/무로 나뉜다

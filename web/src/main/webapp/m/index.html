@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>모바일 전용 페이지</title>
+</head>
+<body>
+[모바일 전용 input 형태]<br>
+입력1(ಥ _ ಥ) : <input type="text"><br> <!--모바일,PC -->
+입력2 🤢: <input type="number"><br> <!--모바일 전용, 숫자만 입력-->
+입력3 : <input type="color"><br> <!--모바일,PC -->
+입력4 : <input type="tel"><br> <!--모바일 전용 전화번호-->
+입력5 : <input type="time"><br> <!--모바일,PC 시간선택-->
+입력6 : <input type="date"><br> <!--모바일,PC 날짜선택-->
+입력7 : <input type="datetime-local"><br><!--모바일,PC 날짜,시간선택-->
+입력8 : <input type="week"><br>  <!--모바일,PC 주차선택 ios에서는 작동x-->
+입력9 : <input type="email"><br> <!--모바일 email입력-->
+입력10 : <br><!--모바일,PC 범위입력-->
+<form oninput="sound2.value=parseInt(sound.value)">
+1 <input type="range" id="sound" min="1" max="10">10<br>
+<output for="sound" name="sound2"></output><br>
+</form>
+입력11 : <input type="url"><br><!--모바일 도메인,경로 입력--><br><br><br>
+<a href="tel:027222111">학원 고객센터 : 027222111</a><br>
+입력12 : <input type="text" name="product" list="subject">
+<datalist id="subject">
+	<option value="HTML">html</option>
+	<option value="jsp">jsp</option>
+	<option value="js">js</option>
+	<option value="java">java</option>
+</datalist>
+
+</body>
+</html>
