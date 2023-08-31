@@ -24,6 +24,5 @@ public class ThreadTest {
 		List<Integer> quantity = Arrays.asList(2, 1, 1, 2, 3, 2, 1, 1, 2, 3);
 		IntStream.range(0, price.size()).parallel().map(e -> price.get(e) * quantity.get(e))
 				.forEach(e -> System.out.print(e + " "));
-		
 	}
 }
